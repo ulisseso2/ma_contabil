@@ -1,0 +1,100 @@
+/* App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #FEFAE0;
+  color: #7F5539;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: #D4A373;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #FEFAE0;
+}
+
+.nav-button {
+  text-decoration: none;
+  background-color: #FEFAE0;
+  color: dimgray;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 5px;
+}
+
+.nav-button:hover {
+  background-color: #E9EDC9;
+}
+
+.section1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #E9EDC9;
+  padding: 2rem;
+  flex-wrap: wrap; /* Permite quebra dos elementos */
+}
+
+.text-content {
+  max-width: 50%;
+  text-align: justify;
+  font-size: larger;
+}
+
+.image {
+  max-width: 400px;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .section1 {
+    flex-direction: column;
+  }
+
+  .text-content {
+    max-width: 100%;
+  }
+
+  .image {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+
+.services {
+  background-color: #CCD5AE;
+  padding: 2rem;
+  text-align: center; /* Centraliza o título */
+}
+
+.service-lists {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem; /* Adiciona espaço entre o título e as listas */
+}
+
+.service-list {
+text-align: left;
+  padding: 0;
+}
+
+
+.footer {
+  background-color: #D4A373;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
