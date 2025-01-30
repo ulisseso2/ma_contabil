@@ -30,17 +30,28 @@ body {
   align-items: center;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Permite a quebra de linha */
 }
 
 .header h1 {
   font-size: 1.8rem;
   font-weight: 600;
+  text-align: center;
+  margin-left: 30px;
+  
 }
 
-nav {
+
+.logo {
+  max-width: 60px;
+}
+
+/*nav {
   display: flex;
   gap: 1rem;
-}
+  flex-grow: 1;
+  justify-content: center;
+}*/
 
 .nav-button {
   text-decoration: none;
@@ -160,5 +171,24 @@ nav {
 
   .footer {
     flex-direction: column;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .nav-button {
+    width: 80%;
+    text-align: center;
   }
 }
