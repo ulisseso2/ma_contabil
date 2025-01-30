@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import expenseOptions from '../data/expenseOptions.json';
 import '../css/FormPage.css';
@@ -6,11 +6,15 @@ import '../css/FormPage.css';
 
 const PaymentForm = () => {
     const [form, setForm] = useState(createNewForm());
-    const [paymentList, setPaymentList] = useState([]);
+    const [paymentList, setPaymentList] = useState(() => {
+        const storedPayments = localStorage.getItem('paymentList');
+        return storedPayments ? JSON.parse(storedPayments) : [];
+    });
     const [error, setError] = useState("");
     const [cnpj, setCnpj] = useState("");
     const [razaoSocial, setRazaoSocial] = useState("");
     const [errorForm, setErrorForm] = useState("");
+
 
     // Função para criar um novo formulário vazio
     function createNewForm() {
@@ -24,6 +28,9 @@ const PaymentForm = () => {
             competence: ""
         };
     }
+    useEffect(() => {
+        localStorage.setItem("paymentList", JSON.stringify(paymentList));
+    }, [paymentList]);
 
     // Função para lidar com alterações nos campos do formulário
     const handleInputChange = (field, value) => {
@@ -134,6 +141,16 @@ const PaymentForm = () => {
     const handleDelete = (index) => {
         const updatedList = paymentList.filter((_, i) => i !== index);
         setPaymentList(updatedList);
+    };
+
+    const handleClearData = () => {
+        if (window.confirm("Tem certeza que deseja limpar todos os pagamentos?")) {
+            setPaymentList([]);
+            localStorage.removeItem("paymentList");
+            alert("Todos os pagamentos foram excluídos com sucesso!");
+        } else {
+            return
+        }
     };
 
     // Função para gerar o conteúdo do CSV
@@ -255,10 +272,33 @@ const PaymentForm = () => {
             {/* Botão de salvar */}
             <div className="form-actions">
                 <button className="save-button" onClick={handleSave}>Salvar</button>
+
             </div>
 
             {/* Lista de pagamentos salvos */}
             <h3 className="saved-payments-title">Pagamentos Salvos:</h3>
+            {paymentList.length > 0 && (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <p style={{ color: '#555', marginRight: '10px' }}>Você tem pagamentos Salvos!</p>
+                    <button
+                        className="clear-button"
+                        onClick={handleClearData}
+                        style={{
+                            padding: '10px 10px',
+                            fontSize: '10px',
+                            backgroundColor: '#FF6347',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            height: '30px',
+
+                        }}
+                    >Excluir Lista
+                    </button>
+                </div>
+            )}
+
             <table className="payment-table">
                 <thead>
                     <tr>
