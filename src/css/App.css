@@ -184,7 +184,7 @@ body {
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
-    margin-top: 15px;
+    margin: 15px;
   }
 
   .nav-button {
