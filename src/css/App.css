@@ -1,10 +1,18 @@
 /* App.css */
-body {
-  font-family: 'Arial', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
   margin: 0;
   padding: 0;
-  background-color: #FEFAE0;
-  color: #7F5539;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fefefe;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .app-container {
@@ -13,88 +21,144 @@ body {
   min-height: 100vh;
 }
 
+/* Header */
 .header {
-  background-color: #D4A373;
-  padding: 1rem;
+  background-color: #E29578;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #FEFAE0;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
 }
 
 .nav-button {
   text-decoration: none;
-  background-color: #FEFAE0;
-  color: dimgray;
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  border-radius: 5px;
+  background-color: white;
+  color: #E29578;
+  padding: 0.6rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .nav-button:hover {
-  background-color: #E9EDC9;
+  background-color: #E29578;
+  color: white;
 }
 
+/* Section 1 */
 .section1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  background-color: #E9EDC9;
-  padding: 2rem;
-  flex-wrap: wrap; /* Permite quebra dos elementos */
+  padding: 3rem;
+  gap: 2rem;
+  background-color: #FAF3E0;
+  flex-wrap: wrap;
 }
 
 .text-content {
   max-width: 50%;
-  text-align: justify;
-  font-size: larger;
+  color: #333;
+}
+
+.text-content h1 {
+  font-size: 2.5rem;
+  color: #E29578;
+  margin-bottom: 1rem;
+}
+
+.text-content p {
+  font-size: 1rem;
+  color: #555;
 }
 
 .image {
   max-width: 400px;
-  border-radius: 8px;
-  margin-top: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-  .section1 {
-    flex-direction: column;
-  }
+/* Services */
+.services {
+  background-color: #DAB7A1;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: white;
+}
 
+.services h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.service-lists {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.service-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.service-list li {
+  font-size: 1.1rem;
+  background-color: white;
+  color: #555;
+  padding: 0.6rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Footer */
+.footer {
+  background-color: #E29578;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
+}
+
+.footer span {
+  color: #FF6B6B;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .text-content {
     max-width: 100%;
   }
 
   .image {
     max-width: 100%;
-    margin-top: 1rem;
   }
-}
 
+  .service-lists {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.services {
-  background-color: #CCD5AE;
-  padding: 2rem;
-  text-align: center; /* Centraliza o título */
-}
-
-.service-lists {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 1rem; /* Adiciona espaço entre o título e as listas */
-}
-
-.service-list {
-text-align: left;
-  padding: 0;
-}
-
-
-.footer {
-  background-color: #D4A373;
-  color: white;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
+  .footer {
+    flex-direction: column;
+  }
 }
