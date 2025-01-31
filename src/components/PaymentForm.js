@@ -178,7 +178,11 @@ const PaymentForm = () => {
     // Retorno do JSX
     return (
         <div className="form-page-container">
-            <nav><Link to='/' className="nav-button">Voltar para Home</Link></nav>
+            <div className='header-cadastro'>
+
+                <img src="logocorv1.jpg" className="logo" alt="logo MA Contabil" />
+                <nav><Link to='/' className="nav-button">Voltar para Home</Link></nav>
+            </div>
             <h2 className="form-title">Cadastro de Pagamentos</h2>
             <div className="form-container">
                 {/* Data do Pagamento */}

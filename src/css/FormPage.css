@@ -1,6 +1,6 @@
 .form-page-container {
     max-width: 900px;
-    margin: 40px auto;
+    margin: auto;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 8px;
@@ -138,3 +138,8 @@ textarea {
     background-color: #ccc;
     cursor: not-allowed;
 }
+.header-cadastro{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }

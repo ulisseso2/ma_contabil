@@ -6,7 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.header-cadastro{
+  display: flex;
+  background-color: #282c34;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
