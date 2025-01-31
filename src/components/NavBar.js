@@ -7,7 +7,7 @@ function NavBar() {
 
     <section className="header">
 
-      <img src="logo_brancav1.png" alt="Imagem ilustrativa" className="logo" />
+      <img src="logobrancav1.jpg" alt="MA Contabil" className="logo" />
       <h1>M A CONTABIL</h1>
 
 
