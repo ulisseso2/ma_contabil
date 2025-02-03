@@ -101,28 +101,22 @@ const PaymentForm = () => {
             return;
         }
 
-        // Busca a despesa selecionada no JSON
         const selectedExpense = expenseOptions.find((opt) => opt.code === form.expense);
-
-        // Verifica se a despesa foi encontrada
         if (!selectedExpense) {
             setError("A despesa selecionada não foi encontrada. Verifique o formulário.");
             return;
         }
 
-        // Cria o novo pagamento
         const newPayment = {
             ...form,
+            paymentDate: form.paymentDate, // Salva a data exata sem conversão
             expense: {
                 code: selectedExpense.code,
                 name: selectedExpense.name,
             },
         };
 
-        // Atualiza a lista de pagamentos
         setPaymentList([...paymentList, newPayment]);
-
-        // Reseta o formulário e erros
         setForm(createNewForm());
         setError("");
     };
@@ -162,7 +156,7 @@ const PaymentForm = () => {
         // Apenas os dados, sem cabeçalho
         const rows = paymentList.map(payment => {
             return [
-                new Date(payment.paymentDate).toLocaleDateString('pt-BR'),
+                payment.paymentDate,
                 payment.expense.code,
                 payment.amount,
                 payment.history,
@@ -316,7 +310,7 @@ const PaymentForm = () => {
                 <tbody>
                     {paymentList.map((payment, i) => (
                         <tr key={i}>
-                            <td>{new Date(payment.paymentDate).toLocaleDateString('pt-BR')}</td>
+                            <td>{payment.paymentDate.split('-').reverse().join('/')}</td>
                             <td>{payment.amount}</td>
                             <td>{payment.expense.name}</td>
                             <td>{payment.penalty} - {payment.interest}</td>
