@@ -54,7 +54,7 @@ const PaymentForm = () => {
             try {
                 // Criar um blob do conteúdo do CSV
                 const blob = new Blob([csvContent], { type: 'text/csv' });
-                const fileName = 'pagamentos.csv';
+                const fileName = cnpj + '-' + razaoSocial + '.csv';
 
                 if (navigator.canShare && navigator.canShare({ files: [new File([blob], fileName)] })) {
                     const file = new File([blob], fileName, { type: 'text/csv' });
@@ -94,6 +94,53 @@ const PaymentForm = () => {
             </button>
         );
     };
+
+    const DownloadCSV = ({ csvContent }) => {
+
+        const handleDownload = () => {
+            if (!cnpj || !razaoSocial) {
+                setErrorForm("CNPJ e Razão Social devem estar preenchidos.");
+                return;
+            } else {
+                setErrorForm("");
+            }
+
+            try {
+                // Criar um blob do conteúdo do CSV
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const fileName = `${cnpj}-${razaoSocial}.csv`;
+
+                // Criar link de download
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (error) {
+                console.error('Erro ao baixar o arquivo:', error);
+            }
+        };
+
+        return (
+            <button
+                onClick={handleDownload}
+                style={{
+                    padding: '10px 20px',
+                    fontSize: '16px',
+                    backgroundColor: '#2196F3',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    marginLeft: '10px',
+                }}
+            >
+                Baixar Arquivo
+            </button>
+        );
+    };
+
     // Função para salvar os dados
     const handleSave = () => {
         if (!form.paymentDate || !form.expense || !form.amount) {
@@ -155,18 +202,21 @@ const PaymentForm = () => {
 
         // Apenas os dados, sem cabeçalho
         const rows = paymentList.map(payment => {
+            const amountWithoutThousands = payment.amount.replace(/\./g, "");
+            const penaltyWithoutThousands = payment.penalty.replace(/\./g, "");
+            const interestWithoutThousands = payment.interest.replace(/\./g, "");
             return [
                 payment.paymentDate,
                 payment.expense.code,
-                payment.amount,
+                amountWithoutThousands,
                 payment.history,
-                payment.penalty,
-                payment.interest,
+                penaltyWithoutThousands,
+                interestWithoutThousands,
                 payment.competence ? `${payment.competence.substring(5, 7)}/${payment.competence.substring(0, 4)}` : ''
             ].join(";");
         });
 
-        return rows.join("\n");
+        return '\uFEFF' + rows.join("\n");
     };
 
     // Retorno do JSX
@@ -358,6 +408,7 @@ const PaymentForm = () => {
             <div className="form-actions">
                 <h3>Compartilhar Arquivo CSV</h3>
                 <ShareCSV csvContent={generateCSVContent()} />
+                <DownloadCSV csvContent={generateCSVContent()} />
             </div>
         </div>
     );
