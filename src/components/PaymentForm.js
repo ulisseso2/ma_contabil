@@ -124,7 +124,7 @@ const PaymentForm = () => {
         };
 
         return (
-            <button
+            <button className="clear-button"
                 onClick={handleDownload}
                 style={{
                     padding: '10px 20px',
@@ -328,21 +328,19 @@ const PaymentForm = () => {
             {paymentList.length > 0 && (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <p style={{ color: '#555', marginRight: '10px' }}>Você tem pagamentos Salvos!</p>
-                    <button
-                        className="clear-button"
+                    <button className="clear-button"
                         onClick={handleClearData}
                         style={{
-                            padding: '10px 10px',
-                            fontSize: '10px',
-                            backgroundColor: '#FF6347',
-                            color: 'white',
+                            backgroundColor: '#d9534f',
+                            color: '#fff',
                             border: 'none',
-                            borderRadius: '4px',
+                            padding: '5px 10px',
+                            borderRadius: '5px',
                             cursor: 'pointer',
-                            height: '30px',
-
+                            marginLeft: '10px',
                         }}
-                    >Excluir Lista
+                    >
+                        Excluir Lista
                     </button>
                 </div>
             )}
@@ -377,8 +375,8 @@ const PaymentForm = () => {
             </table>
 
             {/* Novo Formulário de CNPJ / Razão Social */}
-            <h3>Informações da Empresa</h3>
-            <div className="form-container">
+            <div className="form-empresa">
+                <h3>Informações da Empresa</h3>
                 <div className="form-group">
                     <label htmlFor="cnpj">CNPJ / CPF:</label>
                     <input
@@ -406,7 +404,6 @@ const PaymentForm = () => {
 
             {/* Botão Compartilhar */}
             <div className="form-actions">
-                <h3>Compartilhar Arquivo CSV</h3>
                 <ShareCSV csvContent={generateCSVContent()} />
                 <DownloadCSV csvContent={generateCSVContent()} />
             </div>

@@ -7,6 +7,23 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.logo {
+    max-width: 50px;
+    margin-bottom: 20px;
+}
+
+.nav-button {
+    background-color: #e29578;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.nav-button:hover {
+    background-color: #d18063;
+}
+
 .form-title {
     text-align: center;
     margin-bottom: 20px;
@@ -23,6 +40,18 @@
     border-radius: 8px;
     margin-bottom: 20px;
     background: #fff;
+}
+
+.form-empresa {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #fff;
+    margin-top: 10px;
 }
 
 .form-group {
@@ -73,10 +102,16 @@ textarea {
     background: #007bff;
     color: #fff;
 }
+.add-button:hover {
+    background: #0056b3;
+}
 
 .save-button {
     background: #28a745;
     color: #fff;
+}
+.save-button:hover {
+    background: #218838;
 }
 
 .saved-payments-title {
@@ -130,6 +165,7 @@ textarea {
     cursor: pointer;
     font-size: 10px;
 }
+
 .send-button {
     background-color: #28a745;
     color: white;

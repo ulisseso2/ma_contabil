@@ -1,22 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import '../css/App.css';
+import React from 'react';
+import '../css/NavBar.css';
 
 function NavBar() {
   return (
-
-    <section className="header">
-
-      <img src="logobrancav1.jpg" alt="MA Contabil" className="logo" />
-      <h1>M A CONTABIL</h1>
-
-
-      <nav >
-        <Link to="/pagamentos" className="nav-button">Pagamentos</Link>
-      </nav>
-    </section>
-
+    <nav className="nav-bar">
+      <div className="logo">
+        <a href="#home">
+          <img src="logo_brancav1.png" alt="MaContabil Logo" />
+        </a>
+      </div>
+      <h1 className="nav-title">M A CONTABIL</h1>
+      <ul className="nav-links">
+        <li>
+          <a href="#Services">Serviços</a>
+        </li>
+        <li>
+          <a href="#Contact">Contato</a>
+        </li>
+        <li>
+          <a href="/pagamentos">Pagamentos</a>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
-export default NavBar
+export default NavBar;

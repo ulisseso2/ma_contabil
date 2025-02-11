@@ -1,0 +1,40 @@
+.home {
+  position: relative;
+  min-height: 100vh;
+  background: url('../images/background.jpg') no-repeat center center;
+  background-size: cover;
+  /* Removendo o efeito parallax global */
+  background-attachment: fixed;
+}
+
+/* Camada overlay para melhorar a legibilidade */
+.home::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* Conteúdo acima do overlay */
+.home > .content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Para mobile, desativa o parallax global e ajusta o container */
+@media (max-width: 768px) {
+  .home {
+    background-attachment: scroll;
+  }
+  .home > .content {
+    padding: 1rem;
+    max-width: 100%;
+  }
+}
