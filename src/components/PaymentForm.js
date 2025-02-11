@@ -88,6 +88,7 @@ const PaymentForm = () => {
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer',
+                    margin: '5px'
                 }}
             >
                 Compartilhar Arquivo
@@ -133,7 +134,6 @@ const PaymentForm = () => {
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer',
-                    marginLeft: '10px',
                 }}
             >
                 Baixar Arquivo

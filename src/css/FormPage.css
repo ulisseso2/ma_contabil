@@ -96,15 +96,21 @@ textarea {
 }
 
 .payment-table {
+    width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    overflow-x: auto;
 }
 
 .payment-table th, .payment-table td {
     padding: 5px;
     text-align: left;
-    border: 1px solid #ddd;
-    font-size: x-small;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+.payment-table tr:nth-child(odd) {
+    background-color: #e7e4e4;
 }
 
 .payment-table th {
@@ -133,6 +139,7 @@ textarea {
     font-size: 16px;
     border-radius: 5px;
     margin-top: 10px;
+   
 }
 .send-button:disabled {
     background-color: #ccc;
@@ -142,4 +149,30 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-around;
-  }
+}
+@media (max-width: 768px) {
+    .form-page-container {
+        margin: auto;
+        padding: 10px;
+    }
+    .form-group {
+        flex: 1 1 100%;
+    }
+
+    .payment-table th,
+    .payment-table td {
+        font-size: 12px;
+        padding: 3px;
+    }
+
+    .add-button,
+    .save-button,
+    .nav-button {
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .delete-button {
+        font-size: 12px;
+    }
+}
