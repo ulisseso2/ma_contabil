@@ -47,10 +47,8 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone <URL_DO_SEU_REPOSITORIO>
+    git clone https://github.com/ulisseso2/ma_contabil.git
     ```
-    (Substitua `<URL_DO_SEU_REPOSITORIO>` pela URL real do seu repositório GitHub.)
-
 2.  **Navegue até a pasta do projeto:**
     ```bash
     cd macontabil_site
@@ -61,12 +59,6 @@ Certifique-se de ter as seguintes ferramentas instaladas:
     npm install
     ```
 
-4.  **Remova o arquivo `yarn.lock` (se existir), para evitar conflitos de gerenciamento de pacotes:**
-    ```bash
-    rm yarn.lock
-    ```
-    *(É bom ter apenas um lock file (`package-lock.json` para npm) para garantir a consistência das dependências.)*
-
 ### Rodando a Aplicação
 
 Para iniciar o servidor de desenvolvimento:
@@ -76,11 +68,12 @@ npm start
 
 ```
 ## 📂 Estrutura do Projeto
+``bash
 .
 ├── public/                 # Arquivos públicos (index.html, imagens, etc.)
 │   ├── index.html
 │   └── favicon.ico
-│   └── logobrancav1.jpg    # <-- Verifique se suas imagens estão aqui
+│   └── logobrancav1.jpg  
 │   └── logocorv1.jpg
 │   └── imagem_contabilista.jpg
 ├── src/
@@ -105,7 +98,7 @@ npm start
 ├── package.json            # Metadados e dependências do projeto
 ├── package-lock.json       # Bloqueio de versões das dependências
 └── README.md               # Este arquivo!
-
+```
 
 ## 🤝 Contribuição
 Sinta-se à vontade para contribuir com este projeto! Se encontrar bugs ou tiver sugestões de melhoria, por favor, abra uma issue ou envie um pull request.
@@ -115,6 +108,5 @@ Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para ma
 
 
 ** Ulisses Oliveira ** ulissesrce@gmail.com
-
 
 ---
