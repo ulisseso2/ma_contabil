@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# 📊 MA Contabil - Seu Parceiro Contábil Digital
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## Sobre o Projeto
 
-In the project directory, you can run:
+Este é um aplicativo web **React.js** desenvolvido para a **MA Contabil**, oferecendo tanto um portal institucional para apresentar nossos serviços quanto uma ferramenta funcional para **gerenciamento e exportação de pagamentos**.
 
-### `npm start`
+Nosso objetivo é simplificar a gestão contábil, permitindo que nossos clientes registrem suas despesas e gerem relatórios em CSV de forma rápida e eficiente.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Funcionalidades Principais
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* **Site Institucional:**
+    * Página inicial (`/`) com informações sobre a MA Contabil, nossos valores e serviços.
+    * Navegação intuitiva com barra superior e rodapé.
+* **Cadastro de Pagamentos:**
+    * Interface dedicada (`/pagamentos`) para registro detalhado de pagamentos.
+    * Campos para data, tipo de despesa (seleção), valor, histórico, multa, juros e competência.
+    * Utiliza `localStorage` para persistir os dados dos pagamentos no navegador do usuário.
+    * Opção para limpar todos os pagamentos registrados.
+* **Exportação de Dados:**
+    * Geração de arquivo **CSV** contendo todos os pagamentos registrados.
+    * Funcionalidades para **compartilhar** o arquivo CSV diretamente pelo navegador (se suportado) ou fazer **download** para o seu dispositivo.
+    * Nome do arquivo CSV personalizável com CNPJ/CPF e Razão Social/Nome do cliente.
 
-### `npm test`
+## 🛠️ Tecnologias Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **React.js 19:** Biblioteca JavaScript para construção de interfaces de usuário.
+* **React Router DOM 7.1.3:** Para gerenciamento de rotas e navegação na aplicação.
+* **HTML5 & CSS3:** Estrutura e estilização das páginas, com foco em responsividade.
+* **JavaScript (ES6+):** Lógica de programação e manipulação de dados.
+* **Node.js & npm:** Ambiente de execução e gerenciador de pacotes.
 
-### `npm run build`
+## ⚙️ Como Configurar e Rodar o Projeto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Siga estes passos para ter o projeto rodando em sua máquina local:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Pré-requisitos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Certifique-se de ter as seguintes ferramentas instaladas:
 
-### `npm run eject`
+* **Node.js** (versão LTS recomendada, ex: `v18.x` ou `v20.x`). Você pode usar o [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) para gerenciar suas versões do Node.js.
+* **npm** (geralmente vem junto com o Node.js).
+* **Git** (para clonar o repositório).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Instalação
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1.  **Clone o repositório:**
+    ```bash
+    git clone <URL_DO_SEU_REPOSITORIO>
+    ```
+    (Substitua `<URL_DO_SEU_REPOSITORIO>` pela URL real do seu repositório GitHub.)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2.  **Navegue até a pasta do projeto:**
+    ```bash
+    cd macontabil_site
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
 
-## Learn More
+4.  **Remova o arquivo `yarn.lock` (se existir), para evitar conflitos de gerenciamento de pacotes:**
+    ```bash
+    rm yarn.lock
+    ```
+    *(É bom ter apenas um lock file (`package-lock.json` para npm) para garantir a consistência das dependências.)*
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Rodando a Aplicação
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Para iniciar o servidor de desenvolvimento:
 
-### Code Splitting
+```bash
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+## 📂 Estrutura do Projeto
+.
+├── public/                 # Arquivos públicos (index.html, imagens, etc.)
+│   ├── index.html
+│   └── favicon.ico
+│   └── logobrancav1.jpg    # <-- Verifique se suas imagens estão aqui
+│   └── logocorv1.jpg
+│   └── imagem_contabilista.jpg
+├── src/
+│   ├── components/         # Componentes React reutilizáveis
+│   │   ├── Footer.js
+│   │   ├── NavBar.js
+│   │   ├── PaymentForm.js
+│   │   ├── Services.js
+│   │   └── Section1.js
+│   ├── css/                # Arquivos CSS para estilização
+│   │   ├── App.css
+│   │   └── FormPage.css
+│   ├── data/               # Dados estáticos (ex: opções de despesa)
+│   │   └── expenseOptions.json
+│   ├── pages/              # Páginas principais da aplicação
+│   │   ├── Home.js
+│   │   └── PaymentFormPage.js
+│   ├── App.js              # Componente principal do aplicativo
+│   ├── index.js            # Ponto de entrada do React
+│   └── reportWebVitals.js
+├── .gitignore              # Arquivos e pastas a serem ignorados pelo Git
+├── package.json            # Metadados e dependências do projeto
+├── package-lock.json       # Bloqueio de versões das dependências
+└── README.md               # Este arquivo!
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Contribuição
+Sinta-se à vontade para contribuir com este projeto! Se encontrar bugs ou tiver sugestões de melhoria, por favor, abra uma issue ou envie um pull request.
 
-### Making a Progressive Web App
+## 📄 Licença
+Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes. (Crie este arquivo se ainda não existir)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+** Ulisses Oliveira ** ulissesrce@gmail.com
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
