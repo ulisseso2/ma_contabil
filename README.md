@@ -68,7 +68,7 @@ npm start
 
 ```
 ## 📂 Estrutura do Projeto
-``bash
+```bash
 .
 ├── public/                 # Arquivos públicos (index.html, imagens, etc.)
 │   ├── index.html
