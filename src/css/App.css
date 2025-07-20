@@ -1,5 +1,16 @@
-/* App.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --primary-color: #3A5A40; /* Seu terracota/laranja queimado */
+  --secondary-color: #A3B18A; /* Seu tom de marrom claro */
+  --background-light: #DAD7CD; /* Seu creme claro */
+  --text-dark: #333333;
+  --text-medium: #555555;
+  --text-light: #FFFFFF;
+  --accent-color: #344E41; /* Um verde sutil para botões/destaque (exemplo) */
+  --soft-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --strong-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
 
 * {
   margin: 0;
@@ -9,8 +20,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #fefefe;
-  color: #333;
+  background-color: var(--background-light); /* Usando a variável */
+  color: var(--text-dark); /* Usando a variável */
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -23,173 +34,357 @@ body {
 
 /* Header */
 .header {
-  background-color: #E29578;
-  padding: 1rem 2rem;
+  background-color: var(--primary-color);
+  padding: 1.2rem 3rem; /* Aumentado um pouco o padding */
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Permite a quebra de linha */
+  color: var(--text-light);
+  box-shadow: var(--soft-shadow);
+  flex-wrap: wrap;
+}
+
+.header .logo { /* Se a imagem logo estiver dentro de um wrapper .header */
+  max-width: 70px; /* Aumentei um pouco para dar mais presença */
+  height: auto;
+  margin-right: 1.5rem; /* Espaçamento entre logo e texto */
 }
 
 .header h1 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-align: center;
-  margin-left: 30px;
-  
+  font-size: 2rem; /* Levemente maior */
+  font-weight: 700; /* Mais ousado */
+  flex-grow: 1; /* Permite que o título ocupe o espaço disponível */
+  margin-left: 0; /* Remover margin-left fixo para melhor alinhamento */
+  white-space: nowrap; /* Evita quebra de linha no título */
+}
+
+/* Adicionando um container para o título e slogan, se você decidir usar */
+.slogan {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.header-brand h1 {
+    margin-bottom: 0.2rem; /* Espaço entre título e slogan */
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.header-brand .slogan {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.9;
 }
 
 
-.logo {
-  max-width: 60px;
-}
-
-/*nav {
+nav {
   display: flex;
-  gap: 1rem;
-  flex-grow: 1;
-  justify-content: center;
-}*/
+  gap: 1.5rem; /* Mais espaçamento entre botões */
+  /* Remover flex-grow e justify-content aqui, a não ser que você tenha vários itens de navegação */
+}
 
 .nav-button {
   text-decoration: none;
-  background-color: white;
-  color: #E29578;
-  padding: 0.6rem 1rem;
-  border-radius: 25px;
+  background-color: var(--text-light); /* Branco */
+  color: var(--primary-color);
+  padding: 0.8rem 1.5rem; /* Padding maior para melhor clique */
+  border-radius: 30px; /* Mais arredondado */
   font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease; /* Transição mais suave */
+  border: 2px solid transparent; /* Adicionar borda transparente para efeito hover */
 }
 
 .nav-button:hover {
-  background-color: #E29578;
-  color: white;
+  background-color: transparent; /* Fundo transparente */
+  color: var(--text-light); /* Cor do texto fica branca */
+  border-color: var(--text-light); /* Borda branca no hover */
+  transform: translateY(-2px); /* Pequeno efeito de elevação */
 }
 
 /* Section 1 */
 .section1 {
+  /* Mantenha todas as propriedades de fundo que você já tem */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 3rem;
-  gap: 2rem;
-  background-color: #FAF3E0;
+  padding: 4rem 3rem;
+  gap: 3rem;
+  background-color: var(--background-light);
+  background-image: url('/public/imagem_contabilista.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-dark); /* A cor do texto pode ser ajustada para branco agora */
   flex-wrap: wrap;
+  text-align: left;
+  position: relative; /* Essencial para posicionar o pseudo-elemento */
+  z-index: 1; /* Garante que o conteúdo fique acima da máscara */
+}
+
+/* Máscara (Overlay) para a Section 1 */
+.section1::before {
+  content: ""; /* Essencial para pseudo-elementos */
+  position: absolute; /* Posição absoluta para cobrir a Section1 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
+  /* Você pode ajustar a cor (rgba) e a opacidade (o último valor, de 0 a 1) */
+  z-index: -1; /* Coloca a máscara atrás do conteúdo, mas na frente da imagem de fundo */
 }
 
 .text-content {
-  max-width: 50%;
-  color: #333;
+  max-width: 550px;
+  /* Garanta que o text-content esteja acima da máscara */
+  position: relative;
+  z-index: 2; /* Maior que o z-index da máscara */
 }
 
 .text-content h1 {
-  font-size: 2.5rem;
-  color: #E29578;
-  margin-bottom: 1rem;
+  font-size: 1.8rem; /* Tamanho do título */
+  color: var(--text-light); /* Usando a variável que definimos */
 }
 
 .text-content p {
-  font-size: 1rem;
-  color: #555;
+  /* Altere a cor do texeto para branco ou uma cor clara */
+  color: var(--text-light); /* Usando a variável que definimos */
 }
 
 .image {
-  max-width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  display: none; /* Mantemos a tag <img> oculta */
+}
+
+.primary-cta-button {
+  display: inline-flex; /* Use flexbox para alinhar ícone e texto */
+  align-items: center; /* Centraliza verticalmente o ícone e o texto */
+  justify-content: center; /* Centraliza horizontalmente o conteúdo do botão */
+  
+  background-color: var(--accent-color); /* Um verde vibrante para o CTA */
+  color: var(--text-light);
+  padding: 1rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin-top: 1.2rem; /* Mais espaço para separar do parágrafo */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.primary-cta-button:hover {
+  background-color: #329966; /* Exemplo de hover mais escuro para --accent-green */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+}
+
+/* Estilo específico para o botão do WhatsApp na Section1 */
+.whatsapp-cta-button {
+    background-color: #25D366; /* Cor oficial do WhatsApp */
+}
+
+.whatsapp-cta-button:hover {
+    background-color: #1DA851; /* Uma cor de hover um pouco mais escura para o WhatsApp */
+    /* Você pode remover a transform e box-shadow no hover aqui se quiser um efeito mais simples para o WhatsApp */
 }
 
 /* Services */
 .services {
-  background-color: #DAB7A1;
-  padding: 3rem 2rem;
+  background-color: var(--light-green); /* Um fundo mais claro para destacar os cards */
+  padding: 4rem 2rem;
   text-align: center;
-  color: white;
+  color: var(--text-dark); /* Texto escuro sobre fundo claro */
 }
 
 .services h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 2.0rem;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-green); /* Título em verde principal */
 }
 
-.service-lists {
+.services-grid {
+  display: grid; /* Usamos Grid para o layout das caixas */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 300px min, 1fr max, ajusta automaticamente */
+  gap: 2.5rem; /* Espaçamento entre as caixas */
+  max-width: 1200px; /* Largura máxima do grid */
+  margin: 0 auto; /* Centraliza o grid */
+}
+
+.service-card {
+  background-color: var(--text-light); /* Fundo branco para o card */
+  border-radius: 12px;
+  box-shadow: var(--soft-shadow); /* Sombra suave */
+  padding: 2.5rem; /* Padding interno generoso */
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center; /* Centraliza conteúdo do card */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave no hover */
+  border: 1px solid var(--border-light); /* Borda sutil */
 }
 
-.service-list {
-  list-style: none;
-  padding: 0;
-  text-align: left;
+.service-card:hover {
+  transform: translateY(-8px); /* Eleva o card no hover */
+  box-shadow: var(--strong-shadow); /* Sombra mais forte no hover */
 }
 
-.service-list li {
-  font-size: 1.1rem;
-  background-color: white;
-  color: #555;
-  padding: 0.6rem 1rem;
-  margin: 0.5rem 0;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+.service-icon {
+  font-size: 2.0rem; /* Tamanho do ícone */
+  color: var(--accent-color); /* Cor vibrante para os ícones */
+  margin-bottom: 1.5rem; /* Espaço abaixo do ícone */
+}
+
+.service-card h3 {
+  font-size: 1.2rem; /* Tamanho do título do serviço */
+  color: var(--primary-green); /* Cor do título do serviço */
+  margin-bottom: 1rem; /* Espaço abaixo do título */
+  font-weight: 600;
+}
+
+.service-card p {
+  font-size: 0.9rem; /* Tamanho do texto da descrição */
+  color: var(--text-medium); /* Cor do texto da descrição */
+  line-height: 1.6;
 }
 
 /* Footer */
 .footer {
-  background-color: #E29578;
-  color: white;
-  padding: 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 2rem 3rem; /* Mais padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   text-align: center;
-  gap: 1rem;
+  gap: 1.5rem; /* Mais espaçamento */
+  font-size: 0.95rem; /* Levemente maior */
 }
 
 .footer span {
-  color: #FF6B6B;
+  color: #FF6B6B; /* Cor do coração */
+}
+
+.footer-info { /* Adicionar uma div para agrupar informações, se necessário */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
-  .text-content {
-    max-width: 100%;
-  }
-
-  .image {
-    max-width: 100%;
-  }
-
-  .service-lists {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer {
-    flex-direction: column;
-  }
-  
+  /* Header */
   .header {
     flex-direction: column;
     align-items: center;
+    padding: 1rem 1rem; /* Menos padding em telas pequenas */
   }
 
+  .header .logo {
+    margin-right: 0; /* Remove margem lateral */
+    margin-bottom: 1rem; /* Espaço abaixo do logo */
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    text-align: center; /* Centraliza o título em telas pequenas */
+    margin-bottom: 0.5rem;
+    white-space: normal; /* Permite quebra de linha em telas pequenas */
+  }
+
+  .header-brand {
+      align-items: center; /* Centraliza o texto do brand */
+  }
 
 
   nav {
     flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-    margin: 15px;
+    gap: 0.8rem; /* Menos gap */
+    width: 100%; /* Nav ocupa toda a largura */
+    margin: 15px 0; /* Ajustar margem */
   }
 
   .nav-button {
-    width: 80%;
+    width: 90%; /* Botão ocupa quase toda a largura */
     text-align: center;
+    padding: 0.7rem 1rem;
   }
 
+  /* Section 1 */
+  .section1 {
+    flex-direction: column;
+    text-align: center; /* Centraliza o texto em telas pequenas */
+    padding: 2rem 1.5rem; /* Menos padding */
+    gap: 2rem;
+  }
+
+  .text-content {
+    max-width: 100%; /* Ocupa toda a largura disponível */
+    text-align: center; /* Centraliza o texto */
+  }
+
+  .text-content h1 {
+    font-size: 2.2rem; /* Título menor para mobile */
+  }
+
+  .text-content p {
+    font-size: 1rem; /* Padrão */
+  }
+
+  .primary-cta-button {
+        width: 80%; /* Ocupa mais largura em telas pequenas */
+        font-size: 1rem;
+        padding: 0.8rem 2rem;
+  }
+
+  .image {
+    max-width: 100%;
+    margin-top: 1rem; /* Adiciona espaço acima da imagem */
+  }
+
+  /* Services */
+   .services {
+    padding: 3rem 1rem;
+  }
+
+  .services h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem;
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+  }
+
+
+  /* Footer */
+  .footer {
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
 }

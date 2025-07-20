@@ -7,9 +7,9 @@ function NavBar() {
 
     <section className="header">
 
-      <img src="logobrancav1.jpg" alt="MA Contabil" className="logo" />
-      <h1>M A CONTABIL</h1>
-
+      <img src="9.png" alt="MA Contabil" className="logo" />
+      <h1>CONTABIL</h1>
+      <p className="slogan">Sua contabilidade transparente e eficiente</p>
 
       <nav >
         <Link to="/pagamentos" className="nav-button">Pagamentos</Link>
