@@ -1,28 +1,46 @@
+:root {
+    --primary-color: #3A5A40;
+    --secondary-color: #A3B18A;
+    --background-light: #DAD7CD;
+    --text-dark: #333333;
+    --text-medium: #555555;
+    --text-light: #FFFFFF;
+    --accent-color: #344E41;
+    --success-color: #588157;
+    --soft-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --strong-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
 .form-page-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 30px;
+    background: var(--background-light);
+    border-radius: 12px;
+    box-shadow: var(--strong-shadow);
+    min-height: 100vh;
 }
 
 .form-title {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .form-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    background: #fff;
+    padding: 25px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    background: var(--text-light);
+    box-shadow: var(--soft-shadow);
 }
 
 .form-group {
@@ -32,57 +50,85 @@
 }
 
 label {
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 0.95rem;
 }
 
 input,
 select,
 textarea {
-    padding: 8px;
+    padding: 12px;
     font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
-    max-width: 280px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    background: var(--text-light);
+    max-width: 100%;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 90, 64, 0.1);
 }
 
 textarea {
-    resize: none;
-    height: 80px;
-    max-width: 280px;
+    resize: vertical;
+    min-height: 80px;
+    max-width: 100%;
 }
 
 .form-actions {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .add-button,
 .save-button {
-    padding: 10px 20px;
+    padding: 14px 30px;
     font-size: 16px;
     margin: 0 10px;
     cursor: pointer;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--soft-shadow);
 }
 
 .add-button {
-    background: #007bff;
-    color: #fff;
+    background: var(--primary-color);
+    color: var(--text-light);
+}
+
+.add-button:hover {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
 }
 
 .save-button {
-    background: #28a745;
-    color: #fff;
+    background: var(--success-color);
+    color: var(--text-light);
+}
+
+.save-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
 }
 
 .saved-payments-title {
-    margin-top: 20px;
-    font-size: 20px;
-    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 .payment-list {
@@ -91,88 +137,252 @@ textarea {
 }
 
 .payment-item {
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .payment-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 15px;
     overflow-x: auto;
+    background: var(--text-light);
+    border-radius: 8px;
+    box-shadow: var(--soft-shadow);
 }
 
 .payment-table th, .payment-table td {
-    padding: 5px;
+    padding: 12px;
     text-align: left;
-    border: 1px solid #aaa;
+    border: 1px solid var(--secondary-color);
     font-size: 14px;
 }
 
 .payment-table tr:nth-child(odd) {
-    background-color: #e7e4e4;
+    background-color: var(--background-light);
 }
 
 .payment-table th {
-    background-color: #f2f2f2;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .error-message {
-    color: red;
+    color: #d32f2f;
     font-size: 14px;
     margin-top: 10px;
+    padding: 10px;
+    background-color: #ffebee;
+    border-left: 4px solid #d32f2f;
+    border-radius: 4px;
 }
 
 .delete-button {
     background: none;
     border: none;
-    color: red;
+    color: #d32f2f;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 18px;
+    transition: transform 0.2s ease;
 }
+
+.delete-button:hover {
+    transform: scale(1.2);
+}
+
 .send-button {
-    background-color: #28a745;
+    background-color: var(--success-color);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 14px 30px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 5px;
+    border-radius: 30px;
     margin-top: 10px;
-   
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--soft-shadow);
 }
+
+.send-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
 .send-button:disabled {
-    background-color: #ccc;
+    background-color: var(--secondary-color);
     cursor: not-allowed;
+    opacity: 0.6;
 }
-.header-cadastro{
+
+.header-cadastro {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--primary-color);
 }
+
+.header-cadastro .logo {
+    max-width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.header-cadastro .logo:hover {
+    transform: scale(1.05);
+}
+
+.header-cadastro .nav-button {
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.header-cadastro .nav-button:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.clear-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    box-shadow: var(--soft-shadow);
+}
+
+.clear-button:hover {
+    background-color: #b71c1c;
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
+.form-actions h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.form-actions button {
+    margin: 5px;
+}
+
+.share-button,
+.download-button {
+    padding: 14px 30px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--soft-shadow);
+}
+
+.share-button {
+    background-color: var(--success-color);
+}
+
+.share-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
+.download-button {
+    background-color: #2196F3;
+}
+
+.download-button:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
 @media (max-width: 768px) {
     .form-page-container {
-        margin: auto;
-        padding: 10px;
+        margin: 1rem auto;
+        padding: 15px;
     }
+    
     .form-group {
         flex: 1 1 100%;
+    }
+
+    .payment-table {
+        font-size: 12px;
     }
 
     .payment-table th,
     .payment-table td {
         font-size: 12px;
-        padding: 3px;
+        padding: 8px;
     }
 
     .add-button,
     .save-button,
-    .nav-button {
-        font-size: 12px;
-        padding: 12px;
+    .nav-button,
+    .send-button,
+    .clear-button {
+        font-size: 14px;
+        padding: 12px 20px;
     }
 
     .delete-button {
-        font-size: 12px;
+        font-size: 16px;
+    }
+
+    .header-cadastro {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .header-cadastro .logo {
+        max-width: 60px;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+    }
+
+    .saved-payments-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    .form-title {
+        font-size: 1.3rem;
+    }
+
+    .payment-table th,
+    .payment-table td {
+        font-size: 11px;
+        padding: 6px;
     }
 }

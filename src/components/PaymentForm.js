@@ -80,18 +80,9 @@ const PaymentForm = () => {
         return (
             <button
                 onClick={handleShare}
-                style={{
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    backgroundColor: '#4CAF50',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    margin: '5px'
-                }}
+                className="share-button"
             >
-                Compartilhar Arquivo
+                📤 Compartilhar Arquivo
             </button>
         );
     };
@@ -126,17 +117,9 @@ const PaymentForm = () => {
         return (
             <button
                 onClick={handleDownload}
-                style={{
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    backgroundColor: '#2196F3',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                }}
+                className="download-button"
             >
-                Baixar Arquivo
+                💾 Baixar Arquivo
             </button>
         );
     };
@@ -224,7 +207,7 @@ const PaymentForm = () => {
         <div className="form-page-container">
             <div className='header-cadastro'>
 
-                <img src="logocorv1.jpg" className="logo" alt="logo MA Contabil" />
+                <img src="9.png" className="logo" alt="logo MA Contabil" />
                 <nav><Link to='/' className="nav-button">Voltar para Home</Link></nav>
             </div>
             <h2 className="form-title">Cadastro de Pagamentos</h2>
@@ -326,22 +309,24 @@ const PaymentForm = () => {
             {/* Lista de pagamentos salvos */}
             <h3 className="saved-payments-title">Pagamentos Salvos:</h3>
             {paymentList.length > 0 && (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <p style={{ color: '#555', marginRight: '10px' }}>Você tem pagamentos Salvos!</p>
+                <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    marginBottom: '15px',
+                    padding: '10px',
+                    backgroundColor: '#fff',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                    <p style={{ 
+                        color: '#588157', 
+                        marginRight: '15px',
+                        fontWeight: '600',
+                        margin: '0 15px 0 0'
+                    }}>Você tem {paymentList.length} pagamento(s) salvo(s)!</p>
                     <button
                         className="clear-button"
                         onClick={handleClearData}
-                        style={{
-                            padding: '10px 10px',
-                            fontSize: '10px',
-                            backgroundColor: '#FF6347',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            height: '30px',
-
-                        }}
                     >Excluir Lista
                     </button>
                 </div>
