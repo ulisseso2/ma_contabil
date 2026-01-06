@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import './css/App.css'
 import PaymentFormPage from './pages/PaymentFormPage';
+import CSVEditorPage from './pages/CSVEditorPage';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='pagamentos' element={<PaymentFormPage />} />
+          <Route path='editar-csv' element={<CSVEditorPage />} />
         </Routes>
       </Router>
 

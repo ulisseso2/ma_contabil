@@ -1,0 +1,124 @@
+Instruções para Utilização dos Arquivos de Modelos para
+Importação da Escrituração no Carnê Leão Web
+Estão disponíveis seis modelos de arquivos para importação de lançamentos no Carnê Leão
+Web.
+São três modelos para importação de rendimentos, dois para pagamentos e um para recibos
+do Receita Saúde.
+Escolha o modelo que se encaixa a sua necessidade e utilize-os como base para construção de
+seus próprios arquivos.
+Arquivos de Rendimentos
+Nos modelos de arquivos de Rendimentos, cada linha refere-se a um tipo específico de
+rendimento, sendo composta por campos separados por ponto e vírgula.
+Utilize apenas as que correspondem a sua necessidade. As demais linhas devem ser excluídas.
+Não retire o ponto e vírgula da linha modelo pois a ordem dos campos será afetada e seu
+arquivo será rejeitado durante o processo de importação.
+Será preciso consultar as tabelas de códigos para preenchimento de alguns campos. Elas estão
+disponíveis no endereço:
+https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-
+demonstrativos/dirpf/carne-leao/topicos-ajuda-carne-leao-web#tabelas_auxiliares
+Modelo de Arquivo de Rendimentos do Trabalho Assalariado
+Campos e instruções de preenchimento:
+1) Data de recebimento - substituir 99/99/9999 pela data do recebimento.
+2) Código do rendimento - não há necessidade de substituição. O código corresponde ao tipo
+de rendimento descrito no campo histórico. Escolha a linha que se encaixa a sua necessidade.
+3) Código de ocupação - substituir pelo código correspondente a sua ocupação. Para saber
+qual utilizar, consulte a tabela de códigos de ocupação.
+4) Valor recebido - substituir 9999999,99 pelo valor recebido.
+5) Valor de dedução - vazio (mas posição do campo deve constar do arquivo).
+6) Histórico - substituir o texto do modelo de acordo com seus dados.7) Recebido de - utilizar PF (pessoa física), PJ (pessoa jurídica), EX (exterior).
+8) CPF do titular do pagamento - quando rendimento recebido de pessoa física, substituir
+99999999999 pelo CPF correspondente.
+9) CPF do beneficiário do serviço - quando rendimento recebido de pessoa física, substituir
+99999999999 pelo CPF correspondente.
+10) Indicador de CPF não informado - preenchido somente nos casos em que houver a
+exigência do CPF do beneficiário e esse não foi informado. Preencher com S.
+11) CNPJ - quando rendimento recebido de pessoa jurídica, substituir 99999999999 pelo CNPJ
+correspondente.
+12) Indicador de IRRF - quando rendimento recebido de pessoa jurídica, informar S - se houver
+IRRF, N - caso contrário.
+13) Valor IRRF – valor do importo retido na fonte. O campo indicador de IRRF deve ser S.
+Modelo de Arquivo de Rendimentos de Serviços Notariais e de Registro
+Ordem dos campos e instruções de preenchimento:
+1) Data de recebimento - substituir 99/99/9999 pela data do recebimento.
+2) Código do rendimento - informar código R01.001.002
+3) Código de ocupação - informar código 117.
+4) Valor recebido - substituir 9999999,99 pelo valor recebido.
+5) Valor de dedução - vazio (mas posição do campo deve constar do arquivo).
+6) Histórico - substituir o texto do modelo de acordo com seus dados.
+7) Recebido de - utilizar PF (pessoa física), PJ (pessoa jurídica), EX (exterior).
+8) CPF do titular do pagamento - quando rendimento recebido de pessoa física, substituir
+99999999999 pelo CPF correspondente.
+9) CPF do beneficiário do serviço - vazio.
+10) Indicador de CPF não informado - vazio.
+11) CNPJ - quando rendimento recebido de pessoa jurídica, substituir 99999999999 pelo CNPJ
+correspondente.
+12) Indicador de IRRF - quando rendimento recebido de pessoa jurídica, informar S - se houver
+IRRF, N - caso contrário.
+13) Valor IRRF – valor do importo retido na fonte. O campo indicador de IRRF deve ser S.Modelo de Arquivo de Aluguel e Outros Rendimentos
+Ordem dos campos e instruções de preenchimento:
+1) Data de recebimento - substituir 99/99/9999 pela data do recebimento.
+2) Código do rendimento - não há necessidade de substituição. O código corresponde ao tipo
+de rendimento descrito no campo histórico.
+3) Código de ocupação - vazio (mas posição do campo deve constar do arquivo).
+4) Valor recebido - substituir 9999999,99 pelo valor recebido.
+5) Valor de dedução - para rendimentos de aluguel, quando aplicável, substituir 9999999,99
+pelo valor da dedução. Caso contrário, vazio.
+6) Histórico - substituir o texto do modelo de acordo com seus dados.
+7) Recebido de - utilizar PF (pessoa física), PJ (pessoa jurídica), EX (exterior).
+Modelo de Arquivo de recibos do Receita Saúde
+Campos e instruções de preenchimento:
+1) Data de recebimento - substituir 99/99/9999 pela data do recebimento.
+2) Código do rendimento – sempre R01.001.001
+3) Código de ocupação - substituir pelo código correspondente da ocupação do profissional de
+saúde. Para saber qual utilizar, consulte a tabela de códigos de ocupação.
+4) Valor recebido - substituir 9999999,99 pelo valor recebido.
+5) Valor de dedução - vazio (mas posição do campo deve constar do arquivo).
+6) Histórico - substituir o texto do modelo de acordo com seus dados.
+7) Recebido de - sempre PF (pessoa física).
+8) CPF do titular do pagamento - CPF de quem pagou pelo serviço.
+9) CPF do beneficiário do serviço - CPF do beneficiário do serviço.
+10) Indicador de CPF não informado – sempre VAZIO.
+11) CNPJ - sempre VAZIO.
+12) Indicador de IRRF - sempre VAZIO.
+13) Valor IRRF – sempre VAZIO.
+14) Indicador de recibo – sempre S.
+15) CPF do profissional – substituir pelo CPF do profissional.16) Registro profissional – substituir pelo registro fornecido pelo conselho profissional. Se o
+profissional tiver apenas 1 registro, poderá ficar VAZIO.
+Arquivos de Pagamentos
+Nos modelos de arquivos de pagamentos, cada linha refere-se a um tipo específico de
+pagamento, sendo composta por até 7 campos separados por ponto e vírgula.
+Utilize apenas as que correspondem a sua necessidade. As demais linhas devem ser excluídas.
+Não retire o ponto e vírgula da linha modelo pois a ordem dos campos será afetada e seu
+arquivo será rejeitado durante o processo de importação.
+Se necessitar consultar as tabelas de códigos, consulte o endereço:
+https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-
+demonstrativos/dirpf/carne-leao/topicos-ajuda-carne-leao-web#tabelas_auxiliares
+Modelo de Arquivo de Pagamentos Gerais
+Ordem dos campos e instruções de preenchimento:
+1) Data do pagamento - substituir 99/99/9999 pela data do pagamento.
+2) Código do pagamento - não há necessidade de substituição. O código corresponde ao tipo
+de pagamento descrito no campo histórico.
+3) Valor pago - substituir 9999999,99 pelo valor pago.
+4) Histórico - substituir o texto do modelo de acordo com seus dados.
+5) Valor da Multa - para os pagamentos do tipo Imposto Pago e Previdência Oficial, quando
+aplicável, substituir 9999999,99 pelo valor da multa.
+6) Valor dos Juros - para os pagamentos do tipo Imposto Pago e Previdência Oficial, quando
+aplicável, substituir 9999999,99 pelo valor dos juros.
+7) Competência - para os pagamentos do tipo Imposto Pago e Previdência Oficial, substituir
+99/9999 pelo mês e ano correspondente.
+Modelo de Arquivo de Pagamentos do Plano de Contas Padrão
+Ordem dos campos e instruções de preenchimento:
+1) Data do pagamento - substituir 99/99/9999 pela data do pagamento.2) Código do pagamento - não há necessidade de substituição. O código corresponde ao tipo
+de pagamento descrito no campo histórico.
+3) Valor pago - substituir 9999999,99 pelo valor pago.
+4) Histórico - substituir o texto do modelo de acordo com seus dados.
+No caso de utilização de um plano de contas que não seja o padrão fornecido pelo sistema, os
+códigos de pagamentos devem obedecer a seguinte regra de formação:
+Para despesas dedutíveis:
+P10 + . + código da conta
+Para despesas não dedutíveis: P11 + . + código da conta
+O código da conta varia conforme o plano de contas criado pelo usuário. Para descobrir qual
+utilizar, consulte a funcionalidade Plano de Contas no sistema.
+Exemplo:
+Se despesa dedutível, informar no campo código do pagamento: P10.03.00001
+Se despesa não dedutível, informar no campo código do pagamento: P11. 03.00001

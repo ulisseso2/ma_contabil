@@ -123,6 +123,17 @@ textarea {
     box-shadow: var(--strong-shadow);
 }
 
+.cancel-button {
+    background-color: #6c757d;
+    color: var(--text-light);
+}
+
+.cancel-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
 .saved-payments-title {
     margin-top: 30px;
     margin-bottom: 15px;
@@ -191,6 +202,24 @@ textarea {
 
 .delete-button:hover {
     transform: scale(1.2);
+}
+
+.edit-button {
+    background: none;
+    border: none;
+    color: #1976D2;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.edit-button:hover:not(:disabled) {
+    transform: scale(1.2);
+}
+
+.edit-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
 }
 
 .send-button {
@@ -315,6 +344,27 @@ textarea {
 
 .download-button:hover {
     background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: var(--strong-shadow);
+}
+
+.quick-fill-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    background-color: var(--secondary-color);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: var(--soft-shadow);
+}
+
+.quick-fill-button:hover {
+    background-color: var(--primary-color);
+    color: var(--text-light);
     transform: translateY(-2px);
     box-shadow: var(--strong-shadow);
 }

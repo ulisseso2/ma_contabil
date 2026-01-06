@@ -14,7 +14,24 @@ const PaymentForm = () => {
     const [cnpj, setCnpj] = useState("");
     const [razaoSocial, setRazaoSocial] = useState("");
     const [errorForm, setErrorForm] = useState("");
+    const [editingIndex, setEditingIndex] = useState(null); // Índice do item sendo editado
+    const [expenseSearch, setExpenseSearch] = useState(""); // Busca de despesas
 
+    // Ordenar despesas alfabeticamente
+    const sortedExpenseOptions = [...expenseOptions].sort((a, b) =>
+        a.name.localeCompare(b.name, 'pt-BR')
+    );
+
+    // Filtrar despesas com base na busca
+    const filteredExpenses = sortedExpenseOptions.filter(option =>
+        option.name.toLowerCase().includes(expenseSearch.toLowerCase()) ||
+        option.code.toLowerCase().includes(expenseSearch.toLowerCase())
+    );
+
+    // Verificar se a despesa selecionada requer competência
+    const requiresCompetence = (expenseCode) => {
+        return expenseCode === 'P20.01.00001' || expenseCode === 'P20.01.00004';
+    };
 
     // Função para criar um novo formulário vazio
     function createNewForm() {
@@ -25,7 +42,8 @@ const PaymentForm = () => {
             history: "",
             penalty: "",
             interest: "",
-            competence: ""
+            competenceMonth: "",
+            competenceYear: ""
         };
     }
     useEffect(() => {
@@ -34,9 +52,32 @@ const PaymentForm = () => {
 
     // Função para lidar com alterações nos campos do formulário
     const handleInputChange = (field, value) => {
+        // Se mudou a despesa e a nova não requer competência, limpa os campos
+        if (field === 'expense' && !requiresCompetence(value)) {
+            setForm({
+                ...form,
+                [field]: value,
+                competenceMonth: "",
+                competenceYear: ""
+            });
+        } else {
+            setForm({
+                ...form,
+                [field]: value,
+            });
+        }
+    };
+
+    // Função para preencher competência com o mês anterior
+    const fillPreviousMonth = () => {
+        const today = new Date();
+        const previousMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const year = previousMonth.getFullYear().toString();
+        const month = String(previousMonth.getMonth() + 1).padStart(2, '0');
         setForm({
             ...form,
-            [field]: value,
+            competenceMonth: month,
+            competenceYear: year
         });
     };
 
@@ -67,6 +108,12 @@ const PaymentForm = () => {
                         files: [file],
                     });
                     console.log('Arquivo compartilhado com sucesso!');
+
+                    // Perguntar se deseja limpar a lista após compartilhamento
+                    if (window.confirm('Arquivo compartilhado com sucesso! Deseja limpar a lista de pagamentos?')) {
+                        setPaymentList([]);
+                        localStorage.removeItem('paymentList');
+                    }
                 } else {
                     // Caso o navegador não suporte o compartilhamento de arquivos
                     alert('O recurso de compartilhamento não é suportado neste dispositivo ou navegador.');
@@ -109,6 +156,14 @@ const PaymentForm = () => {
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+
+                // Perguntar se deseja limpar a lista após download
+                setTimeout(() => {
+                    if (window.confirm('Arquivo baixado com sucesso! Deseja limpar a lista de pagamentos?')) {
+                        setPaymentList([]);
+                        localStorage.removeItem('paymentList');
+                    }
+                }, 500);
             } catch (error) {
                 console.error('Erro ao baixar o arquivo:', error);
             }
@@ -131,6 +186,14 @@ const PaymentForm = () => {
             return;
         }
 
+        // Validar competência para despesas que exigem
+        if (requiresCompetence(form.expense)) {
+            if (!form.competenceMonth || !form.competenceYear) {
+                setError("Competência é obrigatória para Previdência Oficial e Imposto Pago.");
+                return;
+            }
+        }
+
         const selectedExpense = expenseOptions.find((opt) => opt.code === form.expense);
         if (!selectedExpense) {
             setError("A despesa selecionada não foi encontrada. Verifique o formulário.");
@@ -146,7 +209,17 @@ const PaymentForm = () => {
             },
         };
 
-        setPaymentList([...paymentList, newPayment]);
+        if (editingIndex !== null) {
+            // Modo de edição: atualiza o item existente
+            const updatedList = [...paymentList];
+            updatedList[editingIndex] = newPayment;
+            setPaymentList(updatedList);
+            setEditingIndex(null);
+        } else {
+            // Modo de adição: adiciona novo item
+            setPaymentList([...paymentList, newPayment]);
+        }
+
         setForm(createNewForm());
         setError("");
     };
@@ -161,8 +234,37 @@ const PaymentForm = () => {
         return `${formattedInteger},${decimalPart}`;
     };
 
+    // Função para editar um pagamento da lista
+    const handleEdit = (index) => {
+        const payment = paymentList[index];
+        setForm({
+            paymentDate: payment.paymentDate,
+            expense: payment.expense.code,
+            amount: payment.amount,
+            history: payment.history,
+            penalty: payment.penalty,
+            interest: payment.interest,
+            competenceMonth: payment.competenceMonth,
+            competenceYear: payment.competenceYear
+        });
+        setEditingIndex(index);
+        setError("");
+        // Rolar para o topo do formulário
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Função para cancelar edição
+    const handleCancelEdit = () => {
+        setForm(createNewForm());
+        setEditingIndex(null);
+        setError("");
+    };
+
     // Função para deletar um pagamento da lista
     const handleDelete = (index) => {
+        if (editingIndex === index) {
+            handleCancelEdit();
+        }
         const updatedList = paymentList.filter((_, i) => i !== index);
         setPaymentList(updatedList);
     };
@@ -177,28 +279,39 @@ const PaymentForm = () => {
         }
     };
 
-    // Função para gerar o conteúdo do CSV
+    // Função para gerar o conteúdo do CSV no formato do Carnê Leão
     const generateCSVContent = () => {
         if (paymentList.length === 0) {
             return "Nenhum pagamento registrado.\n";
         }
 
-        // Apenas os dados, sem cabeçalho
+        // Formato Carnê Leão: Data;Código;Valor;Histórico;Multa;Juros;Competência
         const rows = paymentList.map(payment => {
+            // Converter data de AAAA-MM-DD para DD/MM/AAAA
+            const dateFormatted = payment.paymentDate.split('-').reverse().join('/');
+
+            // Remover separadores de milhares (pontos) mantendo vírgula decimal
             const amountWithoutThousands = payment.amount.replace(/\./g, "");
-            const penaltyWithoutThousands = payment.penalty.replace(/\./g, "");
-            const interestWithoutThousands = payment.interest.replace(/\./g, "");
+            const penaltyWithoutThousands = payment.penalty ? payment.penalty.replace(/\./g, "") : "";
+            const interestWithoutThousands = payment.interest ? payment.interest.replace(/\./g, "") : "";
+
+            // Competência no formato MM/AAAA
+            const competence = payment.competenceMonth && payment.competenceYear
+                ? `${payment.competenceMonth}/${payment.competenceYear}`
+                : '';
+
             return [
-                payment.paymentDate,
-                payment.expense.code,
-                amountWithoutThousands,
-                payment.history,
-                penaltyWithoutThousands,
-                interestWithoutThousands,
-                payment.competence ? `${payment.competence.substring(5, 7)}/${payment.competence.substring(0, 4)}` : ''
+                dateFormatted,                  // 1. Data do pagamento (DD/MM/AAAA)
+                payment.expense.code,           // 2. Código do pagamento
+                amountWithoutThousands,         // 3. Valor pago
+                payment.history || "",          // 4. Histórico
+                penaltyWithoutThousands,        // 5. Valor da Multa
+                interestWithoutThousands,       // 6. Valor dos Juros
+                competence                      // 7. Competência (MM/AAAA)
             ].join(";");
         });
 
+        // BOM (Byte Order Mark) para UTF-8
         return '\uFEFF' + rows.join("\n");
     };
 
@@ -208,7 +321,9 @@ const PaymentForm = () => {
             <div className='header-cadastro'>
 
                 <img src="9.png" className="logo" alt="logo MA Contabil" />
-                <nav><Link to='/' className="nav-button">Voltar para Home</Link></nav>
+                <nav>
+                    <Link to='/' className="nav-button">Home</Link>
+                </nav>
             </div>
             <h2 className="form-title">Cadastro de Pagamentos</h2>
             <div className="form-container">
@@ -224,22 +339,93 @@ const PaymentForm = () => {
                     />
                 </div>
 
-                {/* Despesa */}
+                {/* Despesa com busca */}
                 <div className="form-group">
                     <label htmlFor="expense">Despesa:</label>
-                    <select
-                        id="expense"
-                        value={form.expense}
-                        onChange={(e) => handleInputChange('expense', e.target.value)}
-                        required
-                    >
-                        <option value="">Selecione</option>
-                        {expenseOptions.map((option) => (
-                            <option key={option.code} value={option.code}>
-                                {option.name}
-                            </option>
-                        ))}
-                    </select>
+                    {!form.expense ? (
+                        <>
+                            <input
+                                type="text"
+                                placeholder="🔍 Buscar despesa..."
+                                value={expenseSearch}
+                                onChange={(e) => setExpenseSearch(e.target.value)}
+                                style={{
+                                    marginBottom: '8px',
+                                    padding: '8px',
+                                    fontSize: '14px',
+                                    border: '2px solid var(--secondary-color)',
+                                    borderRadius: '8px'
+                                }}
+                            />
+                            <select
+                                id="expense"
+                                value={form.expense}
+                                onChange={(e) => {
+                                    handleInputChange('expense', e.target.value);
+                                    setExpenseSearch(""); // Limpa a busca após selecionar
+                                }}
+                                required
+                                size="6"
+                                style={{
+                                    minHeight: '150px',
+                                    width: '100%'
+                                }}
+                            >
+                                <option value="">Selecione uma despesa</option>
+                                {filteredExpenses.map((option) => (
+                                    <option key={option.code} value={option.code}>
+                                        {option.name}
+                                    </option>
+                                ))}
+                            </select>
+                            {filteredExpenses.length === 0 && expenseSearch && (
+                                <p style={{ color: '#d32f2f', fontSize: '12px', marginTop: '5px' }}>
+                                    Nenhuma despesa encontrada
+                                </p>
+                            )}
+                        </>
+                    ) : (
+                        <div style={{
+                            padding: '12px',
+                            backgroundColor: 'var(--background-light)',
+                            border: '2px solid var(--success-color)',
+                            borderRadius: '8px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            gap: '10px'
+                        }}>
+                            <div>
+                                <strong style={{ color: 'var(--primary-color)', display: 'block' }}>
+                                    {expenseOptions.find(opt => opt.code === form.expense)?.name}
+                                </strong>
+                                <small style={{ color: 'var(--text-medium)' }}>
+                                    {form.expense}
+                                </small>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    handleInputChange('expense', '');
+                                    setExpenseSearch('');
+                                }}
+                                style={{
+                                    padding: '8px 16px',
+                                    fontSize: '14px',
+                                    backgroundColor: 'var(--secondary-color)',
+                                    color: 'var(--text-dark)',
+                                    border: 'none',
+                                    borderRadius: '20px',
+                                    cursor: 'pointer',
+                                    fontWeight: '600',
+                                    transition: 'all 0.3s ease',
+                                    whiteSpace: 'nowrap'
+                                }}
+                            >
+                                Alterar
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Valor */}
@@ -285,25 +471,107 @@ const PaymentForm = () => {
                         onChange={(e) => handleInputChange('interest', formatCurrency(e.target.value))}
                     />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="competence">Competência:</label>
-                    <input
-                        id="competence"
-                        type="month"
-                        value={form.competence}
-                        onChange={(e) => handleInputChange('competence', e.target.value)}
-                    />
-                </div>
+
+                {/* Competência - apenas para Previdência Oficial e Imposto Pago */}
+                {requiresCompetence(form.expense) && (
+                    <div className="form-group" style={{ flex: '1 1 100%' }}>
+                        <label>
+                            Competência: <span style={{ color: '#d32f2f' }}>*</span>
+                            <small style={{ display: 'block', fontSize: '12px', color: '#666', fontWeight: 'normal' }}>
+                                Obrigatório para {form.expense === 'P20.01.00001' ? 'Previdência Oficial' : 'Imposto Pago'}
+                            </small>
+                        </label>
+                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                            <select
+                                value={form.competenceMonth}
+                                onChange={(e) => handleInputChange('competenceMonth', e.target.value)}
+                                style={{ flex: '0 0 auto', minWidth: '120px' }}
+                                required
+                            >
+                                <option value="">Mês</option>
+                                <option value="01">Janeiro</option>
+                                <option value="02">Fevereiro</option>
+                                <option value="03">Março</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Maio</option>
+                                <option value="06">Junho</option>
+                                <option value="07">Julho</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                            <select
+                                value={form.competenceYear}
+                                onChange={(e) => handleInputChange('competenceYear', e.target.value)}
+                                style={{ flex: '0 0 auto', minWidth: '100px' }}
+                                required
+                            >
+                                <option value="">Ano</option>
+                                {Array.from({ length: 10 }, (_, i) => {
+                                    const year = new Date().getFullYear() - 5 + i;
+                                    return <option key={year} value={year}>{year}</option>;
+                                })}
+                            </select>
+                            <button
+                                type="button"
+                                onClick={fillPreviousMonth}
+                                className="quick-fill-button"
+                                title="Preencher com mês anterior"
+                            >
+                                📅 Mês Anterior
+                            </button>
+                        </div>
+                    </div>
+                )}
 
             </div>
 
             {/* Exibe erro, se houver */}
             {error && <p className="error-message">{error}</p>}
 
+            {/* Indicador de modo de edição */}
+            {editingIndex !== null && (
+                <div style={{
+                    padding: '10px',
+                    backgroundColor: '#FFF3CD',
+                    border: '2px solid #FFC107',
+                    borderRadius: '8px',
+                    marginBottom: '10px',
+                    textAlign: 'center',
+                    fontWeight: '600',
+                    color: '#856404'
+                }}>
+                    ✏️ Editando pagamento #{editingIndex + 1}
+                </div>
+            )}
+
             {/* Botão de salvar */}
             <div className="form-actions">
-                <button className="save-button" onClick={handleSave}>Salvar</button>
-
+                <button className="save-button" onClick={handleSave}>
+                    {editingIndex !== null ? '✓ Atualizar' : 'Salvar'}
+                </button>
+                {editingIndex !== null && (
+                    <button
+                        className="cancel-button"
+                        onClick={handleCancelEdit}
+                        style={{
+                            backgroundColor: '#6c757d',
+                            color: 'white',
+                            padding: '14px 30px',
+                            fontSize: '16px',
+                            border: 'none',
+                            borderRadius: '30px',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            transition: 'all 0.3s ease',
+                            margin: '0 10px'
+                        }}
+                    >
+                        Cancelar
+                    </button>
+                )}
             </div>
 
             {/* Lista de pagamentos salvos */}
@@ -339,20 +607,30 @@ const PaymentForm = () => {
                         <th>Valor</th>
                         <th>Despesa</th>
                         <th>Multa Juros</th>
-                        <th>Excluir</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {paymentList.map((payment, i) => (
-                        <tr key={i}>
+                        <tr key={i} style={editingIndex === i ? { backgroundColor: '#FFF3CD' } : {}}>
                             <td>{payment.paymentDate.split('-').reverse().join('/')}</td>
                             <td>{payment.amount}</td>
                             <td>{payment.expense.name}</td>
                             <td>{payment.penalty} - {payment.interest}</td>
-                            <td>
+                            <td style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
+                                <button
+                                    className="edit-button"
+                                    onClick={() => handleEdit(i)}
+                                    title="Editar"
+                                    disabled={editingIndex !== null && editingIndex !== i}
+                                >
+                                    <span role="img" aria-label="edit">✏️</span>
+                                </button>
                                 <button
                                     className="delete-button"
-                                    onClick={() => handleDelete(i)}>
+                                    onClick={() => handleDelete(i)}
+                                    title="Excluir"
+                                >
                                     <span role="img" aria-label="delete">❌</span>
                                 </button>
                             </td>
