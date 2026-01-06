@@ -309,17 +309,17 @@ const PaymentForm = () => {
             {/* Lista de pagamentos salvos */}
             <h3 className="saved-payments-title">Pagamentos Salvos:</h3>
             {paymentList.length > 0 && (
-                <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     marginBottom: '15px',
                     padding: '10px',
                     backgroundColor: '#fff',
                     borderRadius: '8px',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                 }}>
-                    <p style={{ 
-                        color: '#588157', 
+                    <p style={{
+                        color: '#588157',
                         marginRight: '15px',
                         fontWeight: '600',
                         margin: '0 15px 0 0'
