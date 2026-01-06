@@ -228,10 +228,10 @@ const CSVEditorPage = () => {
                         borderRadius: '8px',
                         marginBottom: '20px'
                     }}>
-                        <label style={{ 
-                            display: 'block', 
-                            marginBottom: '15px', 
-                            fontWeight: '600', 
+                        <label style={{
+                            display: 'block',
+                            marginBottom: '15px',
+                            fontWeight: '600',
                             color: 'var(--primary-color)',
                             fontSize: '16px'
                         }}>
@@ -252,7 +252,7 @@ const CSVEditorPage = () => {
                                 marginBottom: '20px'
                             }}
                         />
-                        
+
                         <div style={{
                             textAlign: 'center',
                             margin: '20px 0',
